@@ -19,6 +19,14 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //Ajout d'utilisateur
 include 'creation_utilisateur.php';
 include 'suppression_utilisateur.php';
+
+//Modification des utilisateurs
+if (isset($_POST['submit_modifier'])){
+    $mdp = $_POST['mdp'];
+    $id_user = $_POST['id_user'];
+    $sql = "UPDATE comptes SET password = '". $mdp ."' WHERE comptes.id = '". $id_user ."' ;";
+    $bdd->query($sql);
+}
 ?>
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,12 +54,13 @@ include 'suppression_utilisateur.php';
     <h1 style="margin-top: 50px; margin-bottom: 30px">Modification des comptes utilisateurs</h1>
 
 
-<!-- Tableau -->
+<!-- Tableau des utilisateurs -->
 <table class="table table-hover">
     <thead>
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Mot de passe</th>
+        <th scope="col">Modification</th>
         <th scope="col">Suppression</th>
     </tr>
     </thead>
